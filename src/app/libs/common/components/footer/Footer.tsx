@@ -1,11 +1,13 @@
+import { Theme } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 
 import FooterCopyright from './FooterCopyright'
 
-const useStyles = makeStyles(() => ({
+const useStyles = makeStyles((theme: Theme) => ({
   footer: {
     backgroundColor: 'white',
+    borderTop: `1px solid ${theme.palette.grey[300]}`,
   },
 }))
 

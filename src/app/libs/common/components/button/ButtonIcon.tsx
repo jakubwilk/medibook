@@ -25,6 +25,7 @@ const useStyles = makeStyles((theme: Theme) => ({
   buttonText: {
     fontSize: important('0.75rem'),
     color: important(theme.palette.grey[600]),
+    marginTop: important('0.25rem'),
   },
 }))
 

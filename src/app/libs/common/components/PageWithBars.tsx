@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles'
 const useStyles = makeStyles(() => ({
   page: {
     height: '100%',
-    minHeight: 'calc(100vh - 120px)',
+    minHeight: 'calc(100vh - 122px)',
   },
 }))
 

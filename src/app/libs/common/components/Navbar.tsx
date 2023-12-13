@@ -16,6 +16,7 @@ interface IProps {
 const useStyles = makeStyles((theme: Theme) => ({
   header: {
     backgroundColor: 'white',
+    borderBottom: `1px solid ${theme.palette.grey[300]}`,
   },
   logo: {
     fontSize: important('18px'),

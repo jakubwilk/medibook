@@ -3,7 +3,9 @@ import { PageWithBars } from '../../common/components'
 const Home = () => {
   return (
     <PageWithBars>
-      <p>{'Home lib'}</p>
+      <div className={'h-full min-h-[inherit] flex items-center justify-center'}>
+        <p className={'my-14'}>{'Home lib'}</p>
+      </div>
     </PageWithBars>
   )
 }
