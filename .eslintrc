@@ -4,9 +4,9 @@
     "es2021": true
   },
   "extends": [
+    "react-app",
+    "react-app/jest",
     "eslint:recommended",
-    "plugin:prettier/recommended",
-    "plugin:@typescript-eslint/recommended",
     "prettier"
   ],
   "parser": "@typescript-eslint/parser",
@@ -17,9 +17,17 @@
     "ecmaVersion": "latest",
     "sourceType": "module"
   },
-  "plugins": ["@typescript-eslint", "prettier", "simple-import-sort"],
+  "plugins": [
+    "react",
+    "@typescript-eslint",
+    "prettier",
+    "simple-import-sort"
+  ],
   "rules": {
-    "strict": ["error", "global"],
+    "strict": [
+      "error",
+      "global"
+    ],
     "prettier/prettier": "error",
     "react/jsx-curly-brace-presence": [
       "error",
@@ -30,7 +38,9 @@
     ],
     "@typescript-eslint/no-empty-interface": 0,
     "@typescript-eslint/no-empty-function": 0,
-    "no-empty-pattern": 0
+    "no-empty-pattern": 0,
+    "simple-import-sort/imports": "error",
+    "simple-import-sort/exports": "error"
   },
   "overrides": [
     {
