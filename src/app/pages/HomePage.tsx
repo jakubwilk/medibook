@@ -1,5 +1,7 @@
+import { Home } from '../libs/home'
+
 const HomePage = () => {
-  return <p>{'Home'}</p>
+  return <Home />
 }
 
 export default HomePage
