@@ -1,3 +1,4 @@
+export * from './backToHome'
 export * from './button'
 export * from './footer'
 export { default as Navbar } from './Navbar'

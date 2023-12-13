@@ -1,11 +1,12 @@
 import { ReactNode, useCallback } from 'react'
-import { FormatSize, Home, Language } from '@mui/icons-material'
+import { FormatSize, Language } from '@mui/icons-material'
 import { Divider, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 
 import { important } from '../utils'
 
+import { BackToHome } from './backToHome'
 import { ButtonIcon } from './button'
 
 interface IProps {
@@ -31,10 +32,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const Navbar = ({ menu, displaySupportMenu = true }: IProps) => {
   const classes = useStyles()
 
-  const handleBackToHomeClick = useCallback(() => {
-    console.log('handleBackToHomeClick')
-  }, [])
-
   const handleChangeFontSizeClick = useCallback(() => {
     console.log('handleChangeFontSizeClick')
   }, [])
@@ -51,12 +48,7 @@ const Navbar = ({ menu, displaySupportMenu = true }: IProps) => {
             {'mediBook'}
           </Typography>
           <div className={'flex items-center gap-4'}>
-            <ButtonIcon
-              icon={<Home />}
-              text={'Strona główna'}
-              tooltipText={'Powrót do strony głównej'}
-              handleClick={handleBackToHomeClick}
-            />
+            <BackToHome />
             {menu && menu}
             <Divider
               orientation={'vertical'}
