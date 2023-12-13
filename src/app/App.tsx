@@ -1,27 +1,13 @@
 import React from 'react'
+import { RouterProvider } from 'react-router-dom'
 import { ThemeProvider } from '@mui/material/styles'
 
-import { theme } from './config'
+import { router, theme } from './config'
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <div className={'App'}>
-        <header className={'App-header'}>
-          <p>
-            {'Edit '}
-            <code>{'src/App.tsx'}</code> {'and save to reload.'}
-          </p>
-          <a
-            className={'App-link'}
-            href={'https://reactjs.org'}
-            target={'_blank'}
-            rel={'noopener noreferrer'}
-          >
-            {'Learn React'}
-          </a>
-        </header>
-      </div>
+      <RouterProvider router={router} />
     </ThemeProvider>
   )
 }
