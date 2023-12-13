@@ -1,5 +1,11 @@
+import { PageWithBars } from '../../common/components'
+
 const Home = () => {
-  return <p>{'Home lib'}</p>
+  return (
+    <PageWithBars>
+      <p>{'Home lib'}</p>
+    </PageWithBars>
+  )
 }
 
 export default Home
