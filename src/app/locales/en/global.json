@@ -19,5 +19,14 @@
   "action": {
     "confirm": "Confirm",
     "cancel": "Cancel"
+  },
+  "languages": {
+    "polish": "Polski",
+    "english": "English"
+  },
+  "fontSize": {
+    "default": "Default (100%)",
+    "larger": "Large (115%)",
+    "veryLarge": "Very large (130%)"
   }
 }
