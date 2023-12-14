@@ -3,7 +3,8 @@
   "navigation": {
     "home": "Strona główna",
     "fontSize": "Rozmiar czcionki",
-    "changeLanguage": "Zmiana języka"
+    "changeLanguage": "Zmiana języka",
+    "menu": "Nawigacja"
   },
   "tooltip": {
     "navigation": {

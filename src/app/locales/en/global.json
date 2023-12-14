@@ -3,7 +3,8 @@
   "navigation": {
     "home": "Home",
     "fontSize": "Font size",
-    "changeLanguage": "Change language"
+    "changeLanguage": "Change language",
+    "menu": "Menu"
   },
   "tooltip": {
     "navigation": {
