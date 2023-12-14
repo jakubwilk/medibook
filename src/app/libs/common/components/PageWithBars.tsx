@@ -1,10 +1,10 @@
-import { ReactNode, useContext, useMemo } from 'react'
+import { ReactNode, useMemo } from 'react'
 import { useMediaQuery, useTheme } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 
-import { FontSizeContext } from '../context'
-import { FontSizeEnum, IFontSizeContext } from '../models'
+import { useFontSizeContext } from '../hooks'
+import { FontSizeEnum } from '../models'
 
 const useStyles = makeStyles(() => ({
   page: {
@@ -18,7 +18,7 @@ interface IProps {
 
 const PageWithBars = ({ children }: IProps) => {
   const classes = useStyles()
-  const { currentSize } = useContext<IFontSizeContext>(FontSizeContext)
+  const { currentSize } = useFontSizeContext()
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('md'))
 
@@ -42,7 +42,7 @@ const PageWithBars = ({ children }: IProps) => {
           minHeight: 'min-h-[calc(100vh-122px)]',
         }
     }
-  }, [currentSize])
+  }, [currentSize, isMobileView])
 
   return <div className={clsx(classes.page, pageClass.minHeight)}>{children}</div>
 }

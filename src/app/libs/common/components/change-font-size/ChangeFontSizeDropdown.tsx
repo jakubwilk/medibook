@@ -1,12 +1,12 @@
-import { useCallback, useContext } from 'react'
+import { useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button, Popover, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 import { isNil } from 'lodash'
 
-import { FontSizeContext } from '../../context'
-import { FontSizeEnum, IFontSizeContext } from '../../models'
+import { useFontSizeContext } from '../../hooks'
+import { FontSizeEnum } from '../../models'
 import { important } from '../../utils'
 
 interface IProps {
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ChangeFontSizeDropdown = ({ isOpen, anchorElement, handleClose }: IProps) => {
   const classes = useStyles()
-  const { setCurrentSize } = useContext<IFontSizeContext>(FontSizeContext)
+  const { setCurrentSize } = useFontSizeContext()
   const { t } = useTranslation()
 
   const handleSetFontSizeClick = useCallback(

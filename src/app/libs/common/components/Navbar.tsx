@@ -1,4 +1,4 @@
-import { MouseEvent, useCallback, useContext, useMemo, useState } from 'react'
+import { MouseEvent, useCallback, useMemo, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import {
   Button,
@@ -12,8 +12,8 @@ import {
 import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 
-import { FontSizeContext } from '../context'
-import { FontSizeEnum, IFontSizeContext } from '../models'
+import { useFontSizeContext } from '../hooks'
+import { FontSizeEnum } from '../models'
 import { important } from '../utils'
 
 import { BackToHome } from './back-to-home'
@@ -47,7 +47,7 @@ const Navbar = ({ displaySupportMenu = true }: IProps) => {
   const isMobileView = useMediaQuery(theme.breakpoints.down('md'))
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
   const isMenuOpen = Boolean(anchorEl)
-  const { currentSize } = useContext<IFontSizeContext>(FontSizeContext)
+  const { currentSize } = useFontSizeContext()
 
   const navbarHeightClass = useMemo(() => {
     switch (currentSize) {
