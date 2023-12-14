@@ -1,5 +1,14 @@
-import { ReactNode, useContext, useMemo } from 'react'
-import { Divider, Theme, Typography } from '@mui/material'
+import { MouseEvent, useCallback, useContext, useMemo, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import {
+  Button,
+  Divider,
+  Menu,
+  Theme,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 
@@ -10,9 +19,9 @@ import { important } from '../utils'
 import { BackToHome } from './back-to-home'
 import { ChangeFontSize } from './change-font-size'
 import { ChangeLanguage } from './change-language'
+import MobileMenu from './MobileMenu'
 
 interface IProps {
-  menu?: ReactNode[]
   displaySupportMenu?: boolean
 }
 
@@ -31,21 +40,34 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const Navbar = ({ menu, displaySupportMenu = true }: IProps) => {
+const Navbar = ({ displaySupportMenu = true }: IProps) => {
   const classes = useStyles()
+  const { t } = useTranslation()
+  const theme = useTheme()
+  const isMobileView = useMediaQuery(theme.breakpoints.down('md'))
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+  const isMenuOpen = Boolean(anchorEl)
   const { currentSize } = useContext<IFontSizeContext>(FontSizeContext)
 
   const navbarHeightClass = useMemo(() => {
     switch (currentSize) {
       case FontSizeEnum.LARGER:
-        return 'h-[90px]'
+        return isMobileView ? 'h-[80px]' : 'h-[90px]'
       case FontSizeEnum.VERY_LARGE:
-        return 'h-[110px]'
+        return isMobileView ? 'h-[90px]' : 'h-[110px]'
       case FontSizeEnum.DEFAULT:
       default:
         return 'h-[70px]'
     }
   }, [currentSize])
+
+  const handleOpenMenuClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(e.currentTarget)
+  }, [])
+
+  const handleCloseMenuClick = useCallback(() => {
+    setAnchorEl(null)
+  }, [])
 
   return (
     <header className={clsx(`w-full`, navbarHeightClass, classes.header)}>
@@ -55,17 +77,30 @@ const Navbar = ({ menu, displaySupportMenu = true }: IProps) => {
             {'mediBook'}
           </Typography>
           <div className={'flex items-center gap-4'}>
-            <BackToHome />
-            {menu && menu}
+            <BackToHome isIconButton={isMobileView} />
             <Divider
               orientation={'vertical'}
               variant={'fullWidth'}
               className={classes.divider}
             />
-            {displaySupportMenu && (
+            {displaySupportMenu && !isMobileView && (
               <>
                 <ChangeFontSize />
                 <ChangeLanguage />
+              </>
+            )}
+            {displaySupportMenu && isMobileView && (
+              <>
+                <Button onClick={handleOpenMenuClick}>
+                  {t('global:navigation.menu')}
+                </Button>
+                <Menu
+                  open={isMenuOpen}
+                  onClose={handleCloseMenuClick}
+                  anchorEl={anchorEl}
+                >
+                  <MobileMenu handleClose={handleCloseMenuClick} />
+                </Menu>
               </>
             )}
           </div>

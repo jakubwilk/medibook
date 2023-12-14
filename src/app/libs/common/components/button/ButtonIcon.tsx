@@ -1,5 +1,12 @@
 import { MouseEvent, ReactNode } from 'react'
-import { Button, Theme, Tooltip, Typography } from '@mui/material'
+import {
+  Button,
+  Theme,
+  Tooltip,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from '@mui/material'
 import { makeStyles } from '@mui/styles'
 
 import { important } from '../../utils'
@@ -31,12 +38,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ButtonIcon = ({ icon, text, tooltipText, handleClick }: IProps) => {
   const classes = useStyles()
+  const theme = useTheme()
+  const isMobileView = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
     <Tooltip title={tooltipText}>
       <Button onClick={handleClick} variant={'text'} className={classes.button}>
         {icon}
-        {text && <Typography className={classes.buttonText}>{text}</Typography>}
+        {text && !isMobileView && (
+          <Typography className={classes.buttonText}>{text}</Typography>
+        )}
       </Button>
     </Tooltip>
   )

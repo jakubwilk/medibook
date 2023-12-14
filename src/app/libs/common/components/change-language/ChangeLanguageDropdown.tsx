@@ -5,6 +5,7 @@ import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 import { changeLanguage } from 'i18next'
 
+import { LanguageTypeEnum } from '../../models'
 import { important } from '../../utils'
 
 interface IProps {
@@ -17,9 +18,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     minWidth: 150,
   },
+  button: {
+    display: 'flex',
+    justifyContent: important('flex-start'),
+  },
   buttonText: {
     fontSize: important('0.8rem'),
     color: important(theme.palette.grey[600]),
+    textTransform: 'none',
   },
 }))
 
@@ -28,7 +34,7 @@ const ChangeLanguageDropdown = ({ isOpen, anchorElement, handleClose }: IProps) 
   const { t } = useTranslation()
 
   const handleSetLanguageClick = useCallback(
-    async (language: string) => {
+    async (language: LanguageTypeEnum) => {
       await changeLanguage(language)
       handleClose()
     },
@@ -48,8 +54,8 @@ const ChangeLanguageDropdown = ({ isOpen, anchorElement, handleClose }: IProps) 
       <div className={clsx('flex items-center flex-col gap-2 p-2', classes.content)}>
         <Button
           variant={'text'}
-          onClick={() => handleSetLanguageClick('pl')}
-          className={'w-full flex items-center'}
+          onClick={() => handleSetLanguageClick(LanguageTypeEnum.PL)}
+          className={clsx('w-full items-center', classes.button)}
         >
           {'🇵🇱'}
           <Typography className={clsx('pl-2', classes.buttonText)}>
@@ -58,8 +64,8 @@ const ChangeLanguageDropdown = ({ isOpen, anchorElement, handleClose }: IProps) 
         </Button>
         <Button
           variant={'text'}
-          onClick={() => handleSetLanguageClick('en')}
-          className={'w-full flex items-center'}
+          onClick={() => handleSetLanguageClick(LanguageTypeEnum.EN)}
+          className={clsx('w-full items-center', classes.button)}
         >
           {'🇬🇧'}
           <Typography className={clsx('pl-2', classes.buttonText)}>

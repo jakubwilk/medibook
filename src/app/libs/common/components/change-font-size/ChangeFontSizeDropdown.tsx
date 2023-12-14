@@ -19,9 +19,14 @@ const useStyles = makeStyles((theme: Theme) => ({
   content: {
     minWidth: 150,
   },
+  button: {
+    display: 'flex',
+    justifyContent: important('flex-start'),
+  },
   buttonText: {
     fontSize: important('0.8rem'),
     color: important(theme.palette.grey[600]),
+    textTransform: 'none',
   },
 }))
 
@@ -58,7 +63,7 @@ const ChangeFontSizeDropdown = ({ isOpen, anchorElement, handleClose }: IProps) 
         <Button
           variant={'text'}
           onClick={() => handleSetFontSizeClick(FontSizeEnum.DEFAULT)}
-          className={'w-full flex items-center'}
+          className={clsx('w-full', classes.button)}
         >
           <Typography className={clsx('pl-2', classes.buttonText)}>
             {t('global:fontSize.default')}
@@ -67,7 +72,7 @@ const ChangeFontSizeDropdown = ({ isOpen, anchorElement, handleClose }: IProps) 
         <Button
           variant={'text'}
           onClick={() => handleSetFontSizeClick(FontSizeEnum.LARGER)}
-          className={'w-full flex items-center'}
+          className={clsx('w-full', classes.button)}
         >
           <Typography className={clsx('pl-2', classes.buttonText)}>
             {t('global:fontSize.larger')}
@@ -76,7 +81,7 @@ const ChangeFontSizeDropdown = ({ isOpen, anchorElement, handleClose }: IProps) 
         <Button
           variant={'text'}
           onClick={() => handleSetFontSizeClick(FontSizeEnum.VERY_LARGE)}
-          className={'w-full flex items-center'}
+          className={clsx('w-full', classes.button)}
         >
           <Typography className={clsx('pl-2', classes.buttonText)}>
             {t('global:fontSize.veryLarge')}
