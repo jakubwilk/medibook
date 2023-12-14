@@ -1,0 +1,23 @@
+{
+  "title": "mediBook - Your e-reception",
+  "navigation": {
+    "home": "Home",
+    "fontSize": "Font size",
+    "changeLanguage": "Change language"
+  },
+  "tooltip": {
+    "navigation": {
+      "homeTitle": "Back to homepage",
+      "fontSizeTitle": "Change font size on site",
+      "changeLanguageTitle": "Pick different language"
+    }
+  },
+  "dialog": {
+    "backToHomeTitle": "Back to homepage",
+    "backToHomeContent": "Dear user, you are trying back to homepage. If you agree to do that, you have to provide your patient number again if you want to get access to your patient panel. Do you want to continue?"
+  },
+  "action": {
+    "confirm": "Confirm",
+    "cancel": "Cancel"
+  }
+}

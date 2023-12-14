@@ -1,4 +1,5 @@
 import { ReactNode, useCallback } from 'react'
+import { useTranslation } from 'react-i18next'
 import { FormatSize, Language } from '@mui/icons-material'
 import { Divider, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 const Navbar = ({ menu, displaySupportMenu = true }: IProps) => {
+  const { t } = useTranslation()
   const classes = useStyles()
 
   const handleChangeFontSizeClick = useCallback(() => {
@@ -59,14 +61,14 @@ const Navbar = ({ menu, displaySupportMenu = true }: IProps) => {
               <>
                 <ButtonIcon
                   icon={<FormatSize />}
-                  text={'Rozmiar czcionki'}
-                  tooltipText={'Zmień rozmiar czcionki na stronie'}
+                  text={t('global:navigation.fontSize')}
+                  tooltipText={t('global:tooltip.navigation.fontSizeTitle')}
                   handleClick={handleChangeFontSizeClick}
                 />
                 <ButtonIcon
                   icon={<Language />}
-                  text={'Zmiana języka'}
-                  tooltipText={'Zmień język strony'}
+                  text={t('global:navigation.changeLanguage')}
+                  tooltipText={t('global:tooltip.navigation.changeLanguageTitle')}
                   handleClick={handleChangeLanguageClick}
                 />
               </>

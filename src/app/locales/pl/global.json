@@ -1,0 +1,23 @@
+{
+  "title": "mediBook - Twoja internetowa recepcja",
+  "navigation": {
+    "home": "Strona główna",
+    "fontSize": "Rozmiar czcionki",
+    "changeLanguage": "Zmiana języka"
+  },
+  "tooltip": {
+    "navigation": {
+      "homeTitle": "Powrót do strony głównej",
+      "fontSizeTitle": "Zmień rozmiar czcionki na stronie",
+      "changeLanguageTitle": "Zmień język strony"
+    }
+  },
+  "dialog": {
+    "backToHomeTitle": "Powrót do strony głównej",
+    "backToHomeContent": "Drogi użytkowniku, wykryto próbę przejścia do strony głównej. Akcja da spowoduje, że aktualna sesja zostanie zakończona i będzie wymagane podanie ponownie numeru pacjenta w celu przejścia do panelu. Czy na pewno chcesz kontynuować?"
+  },
+  "action": {
+    "confirm": "Potwierdź",
+    "cancel": "Anuluj"
+  }
+}

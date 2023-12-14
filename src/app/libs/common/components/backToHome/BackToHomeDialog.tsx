@@ -1,4 +1,5 @@
 import { forwardRef, ReactElement, Ref } from 'react'
+import { useTranslation } from 'react-i18next'
 import {
   Button,
   Dialog,
@@ -30,6 +31,8 @@ const Transition = forwardRef(function Transition(
 })
 
 const BackToHomeDialog = ({ isOpen, handleClose }: IProps) => {
+  const { t } = useTranslation()
+
   return (
     <Dialog
       open={isOpen}
@@ -37,19 +40,14 @@ const BackToHomeDialog = ({ isOpen, handleClose }: IProps) => {
       onClose={handleClose}
       keepMounted
     >
-      <DialogTitle>{'Powrót do strony głównej'}</DialogTitle>
+      <DialogTitle>{t('global:dialog.backToHomeTitle')}</DialogTitle>
       <DialogContent>
-        <Typography>
-          {'Drogi użytkowniku, wykryto próbę przejścia do strony głównej. Akcja da\r'}
-          {'spowoduje, że aktualna sesja zostanie zakończona i będzie wymagane podanie\r'}
-          {'ponownie numeru pacjenta w celu przejścia do panelu. Czy na pewno chcesz\r'}
-          {'kontynuować?\r'}
-        </Typography>
+        <Typography>{t('global:dialog.backToHomeContent')}</Typography>
       </DialogContent>
       <DialogActions>
-        <Button color={'success'}>{'Potwierdź'}</Button>
+        <Button color={'success'}>{t('global:action.confirm')}</Button>
         <Button color={'error'} onClick={handleClose}>
-          {'Anuluj'}
+          {t('global:action.cancel')}
         </Button>
       </DialogActions>
     </Dialog>
