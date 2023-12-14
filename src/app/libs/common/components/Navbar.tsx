@@ -1,14 +1,13 @@
-import { ReactNode, useCallback } from 'react'
-import { useTranslation } from 'react-i18next'
-import { FormatSize, Language } from '@mui/icons-material'
+import { ReactNode } from 'react'
 import { Divider, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 
 import { important } from '../utils'
 
-import { BackToHome } from './backToHome'
-import { ButtonIcon } from './button'
+import { BackToHome } from './back-to-home'
+import { ChangeFontSize } from './change-font-size'
+import { ChangeLanguage } from './change-language'
 
 interface IProps {
   menu?: ReactNode[]
@@ -31,16 +30,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 const Navbar = ({ menu, displaySupportMenu = true }: IProps) => {
-  const { t } = useTranslation()
   const classes = useStyles()
-
-  const handleChangeFontSizeClick = useCallback(() => {
-    console.log('handleChangeFontSizeClick')
-  }, [])
-
-  const handleChangeLanguageClick = useCallback(() => {
-    console.log('handleChangeLanguageClick')
-  }, [])
 
   return (
     <header className={clsx('h-[70px] w-full', classes.header)}>
@@ -59,18 +49,8 @@ const Navbar = ({ menu, displaySupportMenu = true }: IProps) => {
             />
             {displaySupportMenu && (
               <>
-                <ButtonIcon
-                  icon={<FormatSize />}
-                  text={t('global:navigation.fontSize')}
-                  tooltipText={t('global:tooltip.navigation.fontSizeTitle')}
-                  handleClick={handleChangeFontSizeClick}
-                />
-                <ButtonIcon
-                  icon={<Language />}
-                  text={t('global:navigation.changeLanguage')}
-                  tooltipText={t('global:tooltip.navigation.changeLanguageTitle')}
-                  handleClick={handleChangeLanguageClick}
-                />
+                <ChangeFontSize />
+                <ChangeLanguage />
               </>
             )}
           </div>

@@ -1,5 +1,7 @@
-export * from './backToHome'
+export * from './back-to-home'
 export * from './button'
+export * from './change-font-size'
+export * from './change-language'
 export * from './footer'
 export { default as Navbar } from './Navbar'
 export { default as PageWithBars } from './PageWithBars'

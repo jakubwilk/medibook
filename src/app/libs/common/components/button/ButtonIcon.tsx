@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { MouseEvent, ReactNode } from 'react'
 import { Button, Theme, Tooltip, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 
@@ -8,7 +8,7 @@ interface IProps {
   icon: ReactNode
   text?: string
   tooltipText?: string
-  handleClick: () => void
+  handleClick: (ev: MouseEvent<HTMLButtonElement>) => void
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -16,7 +16,7 @@ const useStyles = makeStyles((theme: Theme) => ({
     display: 'flex',
     flexDirection: 'column',
     color: important(theme.palette.primary.main),
-    '&:hover, &:focus': {
+    '&:hover': {
       '& .MuiTypography-root': {
         color: important(theme.palette.primary.main),
       },
