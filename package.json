@@ -20,6 +20,7 @@
     "eslint": "^8.55.0",
     "i18next": "^23.7.9",
     "i18next-resources-to-backend": "^1.2.0",
+    "lodash": "^4.17.21",
     "prettier": "^3.1.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -55,6 +56,7 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash": "^4.14.202",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.0.1",
     "eslint-plugin-simple-import-sort": "^10.0.0",
