@@ -59,7 +59,7 @@ const Navbar = ({ displaySupportMenu = true }: IProps) => {
       default:
         return 'h-[70px]'
     }
-  }, [currentSize])
+  }, [currentSize, isMobileView])
 
   const handleOpenMenuClick = useCallback((e: MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(e.currentTarget)
@@ -71,7 +71,7 @@ const Navbar = ({ displaySupportMenu = true }: IProps) => {
 
   return (
     <header className={clsx(`w-full`, navbarHeightClass, classes.header)}>
-      <div className={'container h-[inherit] mx-auto'}>
+      <div className={'container h-[inherit] px-4 mx-auto'}>
         <div className={'h-full flex items-center justify-between gap-4'}>
           <Typography variant={'h1'} className={classes.logo}>
             {'mediBook'}

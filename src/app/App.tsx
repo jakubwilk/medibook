@@ -1,13 +1,16 @@
 import React from 'react'
 
 import { FontSizeProvider } from './libs/common'
+import { UserContextProvider } from './libs/user'
 import AppContainer from './AppContainer'
 
 function App() {
   return (
-    <FontSizeProvider>
-      <AppContainer />
-    </FontSizeProvider>
+    <UserContextProvider>
+      <FontSizeProvider>
+        <AppContainer />
+      </FontSizeProvider>
+    </UserContextProvider>
   )
 }
 

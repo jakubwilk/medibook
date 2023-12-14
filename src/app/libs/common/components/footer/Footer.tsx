@@ -16,7 +16,7 @@ const Footer = () => {
 
   return (
     <footer className={clsx('h-[50px] w-full', classes.footer)}>
-      <div className={'container h-[inherit] mx-auto'}>
+      <div className={'container h-[inherit] px-4 mx-auto'}>
         <div className={'h-full flex items-center justify-between'}>
           <FooterCopyright />
         </div>

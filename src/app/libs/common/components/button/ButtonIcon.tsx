@@ -15,7 +15,9 @@ interface IProps {
   icon: ReactNode
   text?: string
   tooltipText?: string
-  handleClick: (ev: MouseEvent<HTMLButtonElement>) => void
+  href?: string
+  handleClick?: (ev: MouseEvent<HTMLButtonElement>) => void
+  isLink?: boolean
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -36,14 +38,19 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const ButtonIcon = ({ icon, text, tooltipText, handleClick }: IProps) => {
+const ButtonIcon = ({ icon, text, tooltipText, href, isLink, handleClick }: IProps) => {
   const classes = useStyles()
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
     <Tooltip title={tooltipText}>
-      <Button onClick={handleClick} variant={'text'} className={classes.button}>
+      <Button
+        onClick={handleClick}
+        variant={'text'}
+        className={classes.button}
+        {...(isLink && { href })}
+      >
         {icon}
         {text && !isMobileView && (
           <Typography className={classes.buttonText}>{text}</Typography>

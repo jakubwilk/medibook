@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next'
 import { Home } from '@mui/icons-material'
 import { IconButton } from '@mui/material'
 
+import { useUserContext } from '../../../user'
 import { ButtonIcon } from '../button'
 
 import BackToHomeDialog from './BackToHomeDialog'
@@ -13,6 +14,7 @@ interface IProps {
 
 const BackToHome = ({ isIconButton }: IProps) => {
   const { t } = useTranslation()
+  const { isUser } = useUserContext()
   const [isOpen, setIsOpen] = useState(false)
 
   const handleBackToHomeClick = useCallback((state: boolean) => {
@@ -24,7 +26,8 @@ const BackToHome = ({ isIconButton }: IProps) => {
       {isIconButton ? (
         <IconButton
           content={t('global:navigation.home')}
-          onClick={() => handleBackToHomeClick(true)}
+          {...(isUser && { onClick: () => handleBackToHomeClick(true) })}
+          {...(!isUser && { href: '/' })}
           color={'primary'}
         >
           <Home />
@@ -34,7 +37,8 @@ const BackToHome = ({ isIconButton }: IProps) => {
           icon={<Home />}
           text={t('global:navigation.home')}
           tooltipText={t('global:tooltip.navigation.homeTitle')}
-          handleClick={() => handleBackToHomeClick(true)}
+          {...(isUser && { onClick: () => handleBackToHomeClick(true) })}
+          {...(!isUser && { href: '/' })}
         />
       )}
       <BackToHomeDialog
