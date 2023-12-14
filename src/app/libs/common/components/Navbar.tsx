@@ -1,8 +1,10 @@
-import { ReactNode } from 'react'
+import { ReactNode, useContext, useMemo } from 'react'
 import { Divider, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 
+import { FontSizeContext } from '../context'
+import { FontSizeEnum, IFontSizeContext } from '../models'
 import { important } from '../utils'
 
 import { BackToHome } from './back-to-home'
@@ -31,9 +33,22 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const Navbar = ({ menu, displaySupportMenu = true }: IProps) => {
   const classes = useStyles()
+  const { currentSize } = useContext<IFontSizeContext>(FontSizeContext)
+
+  const navbarHeightClass = useMemo(() => {
+    switch (currentSize) {
+      case FontSizeEnum.LARGER:
+        return 'h-[90px]'
+      case FontSizeEnum.VERY_LARGE:
+        return 'h-[110px]'
+      case FontSizeEnum.DEFAULT:
+      default:
+        return 'h-[70px]'
+    }
+  }, [currentSize])
 
   return (
-    <header className={clsx('h-[70px] w-full', classes.header)}>
+    <header className={clsx(`w-full`, navbarHeightClass, classes.header)}>
       <div className={'container h-[inherit] mx-auto'}>
         <div className={'h-full flex items-center justify-between gap-4'}>
           <Typography variant={'h1'} className={classes.logo}>

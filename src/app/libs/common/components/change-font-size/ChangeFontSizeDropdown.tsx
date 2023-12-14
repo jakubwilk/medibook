@@ -1,10 +1,12 @@
-import { useCallback } from 'react'
+import { useCallback, useContext } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Button, Popover, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 import { isNil } from 'lodash'
 
+import { FontSizeContext } from '../../context'
+import { FontSizeEnum, IFontSizeContext } from '../../models'
 import { important } from '../../utils'
 
 interface IProps {
@@ -25,14 +27,16 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const ChangeFontSizeDropdown = ({ isOpen, anchorElement, handleClose }: IProps) => {
   const classes = useStyles()
+  const { setCurrentSize } = useContext<IFontSizeContext>(FontSizeContext)
   const { t } = useTranslation()
 
   const handleSetFontSizeClick = useCallback(
-    (size: string) => {
+    (size: FontSizeEnum) => {
       const pageElement = document.querySelector('#html') as HTMLElement
 
       if (!isNil(pageElement)) {
         pageElement.style.fontSize = size
+        setCurrentSize(size)
       }
 
       handleClose()
@@ -53,7 +57,7 @@ const ChangeFontSizeDropdown = ({ isOpen, anchorElement, handleClose }: IProps) 
       <div className={clsx('flex items-center flex-col gap-2 p-2', classes.content)}>
         <Button
           variant={'text'}
-          onClick={() => handleSetFontSizeClick('100%')}
+          onClick={() => handleSetFontSizeClick(FontSizeEnum.DEFAULT)}
           className={'w-full flex items-center'}
         >
           <Typography className={clsx('pl-2', classes.buttonText)}>
@@ -62,7 +66,7 @@ const ChangeFontSizeDropdown = ({ isOpen, anchorElement, handleClose }: IProps) 
         </Button>
         <Button
           variant={'text'}
-          onClick={() => handleSetFontSizeClick('115%')}
+          onClick={() => handleSetFontSizeClick(FontSizeEnum.LARGER)}
           className={'w-full flex items-center'}
         >
           <Typography className={clsx('pl-2', classes.buttonText)}>
@@ -71,7 +75,7 @@ const ChangeFontSizeDropdown = ({ isOpen, anchorElement, handleClose }: IProps) 
         </Button>
         <Button
           variant={'text'}
-          onClick={() => handleSetFontSizeClick('130%')}
+          onClick={() => handleSetFontSizeClick(FontSizeEnum.VERY_LARGE)}
           className={'w-full flex items-center'}
         >
           <Typography className={clsx('pl-2', classes.buttonText)}>
