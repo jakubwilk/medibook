@@ -41,7 +41,7 @@ const ChangeFontSizeDropdown = ({ isOpen, anchorElement, handleClose }: IProps) 
 
       handleClose()
     },
-    [handleClose],
+    [handleClose, setCurrentSize],
   )
 
   return (
