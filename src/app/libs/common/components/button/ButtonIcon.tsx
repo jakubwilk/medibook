@@ -1,4 +1,5 @@
-import { MouseEvent, ReactNode } from 'react'
+import { MouseEvent, ReactNode, useMemo } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Button,
   Theme,
@@ -8,6 +9,7 @@ import {
   useTheme,
 } from '@mui/material'
 import { makeStyles } from '@mui/styles'
+import { isNil } from 'lodash'
 
 import { important } from '../../utils'
 
@@ -17,7 +19,6 @@ interface IProps {
   tooltipText?: string
   href?: string
   handleClick?: (ev: MouseEvent<HTMLButtonElement>) => void
-  isLink?: boolean
 }
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -38,24 +39,26 @@ const useStyles = makeStyles((theme: Theme) => ({
   },
 }))
 
-const ButtonIcon = ({ icon, text, tooltipText, href, isLink, handleClick }: IProps) => {
+const ButtonIcon = ({ icon, text, tooltipText, href, handleClick }: IProps) => {
   const classes = useStyles()
   const theme = useTheme()
   const isMobileView = useMediaQuery(theme.breakpoints.down('md'))
 
-  return (
-    <Tooltip title={tooltipText}>
-      <Button
-        onClick={handleClick}
-        variant={'text'}
-        className={classes.button}
-        {...(isLink && { href })}
-      >
+  const ButtonComponent = useMemo(
+    () => (
+      <Button onClick={handleClick} variant={'text'} className={classes.button}>
         {icon}
         {text && !isMobileView && (
           <Typography className={classes.buttonText}>{text}</Typography>
         )}
       </Button>
+    ),
+    [classes.button, classes.buttonText, handleClick, icon, isMobileView, text],
+  )
+
+  return (
+    <Tooltip title={tooltipText}>
+      {isNil(href) ? ButtonComponent : <Link to={href}>{ButtonComponent}</Link>}
     </Tooltip>
   )
 }
