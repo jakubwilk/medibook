@@ -5,7 +5,11 @@ interface IProps {
 }
 
 const HomeMenuGrid = ({ children }: IProps) => {
-  return <div className={'grid grid-cols-2 gap-6'}>{children}</div>
+  return (
+    <div className={'flex flex-col md:grid md:grid-cols-2 gap-6 py-8 px-4'}>
+      {children}
+    </div>
+  )
 }
 
 export default HomeMenuGrid
