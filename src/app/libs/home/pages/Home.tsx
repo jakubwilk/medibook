@@ -1,4 +1,5 @@
 import { useMemo } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Inventory, MeetingRoom, NoteAdd } from '@mui/icons-material'
 import { Theme } from '@mui/material'
 import { makeStyles } from '@mui/styles'
@@ -14,6 +15,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 const Home = () => {
+  const { t } = useTranslation()
   const classes = useStyles()
 
   const iconProps = useMemo(
@@ -32,21 +34,21 @@ const Home = () => {
         <HomeMenuGrid>
           <HomeMenuButton
             href={'/login'}
-            text={'Logowanie'}
+            text={t('home:menu.login')}
             icon={<MeetingRoom {...iconProps} />}
-            description={'Zaloguj sie do panelu pacjenta'}
+            description={t('home:menu.loginDescription')}
           />
           <HomeMenuButton
             href={'/register'}
-            text={'Nowa wizyta'}
-            description={'Umów sie na jednorazową wizytę bez rejestracji'}
+            text={t('home:menu.register')}
+            description={t('home:menu.registerDescription')}
             icon={<NoteAdd {...iconProps} />}
           />
           <HomeMenuButton
             href={'/verify'}
-            text={'Weryfikacja'}
+            text={t('home:menu.verify')}
             icon={<Inventory {...iconProps} />}
-            description={'Sprawdź swoje wizyty bez potrzeby logowania'}
+            description={t('home:menu.verifyDescription')}
             className={'col-span-2'}
             isFullWidth
           />

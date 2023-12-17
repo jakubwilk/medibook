@@ -1,0 +1,10 @@
+{
+  "menu": {
+    "login": "Logowanie",
+    "loginDescription": "Zaloguj się do panelu pacjenta",
+    "register": "Nowa wizyta",
+    "registerDescription": "Umów się nna jednorazową wizytę bez rejestracji",
+    "verify": "Weryfikacja",
+    "verifyDescription": "Sprawdź swoje wizyty bez potrzeby logowania"
+  }
+}

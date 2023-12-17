@@ -1,0 +1,10 @@
+{
+  "menu": {
+    "login": "Login",
+    "loginDescription": "Log into patient panel",
+    "register": "New appointment",
+    "registerDescription": "Make a single appointment without register",
+    "verify": "Verify",
+    "verifyDescription": "Check your appointment without stable account"
+  }
+}
