@@ -1,5 +1,7 @@
+import { VerifyPatient } from '../libs/verify'
+
 const VerifyPatientPage = () => {
-  return <p>{'Verify Patient Page'}</p>
+  return <VerifyPatient />
 }
 
 export default VerifyPatientPage
