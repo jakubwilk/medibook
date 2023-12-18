@@ -1,7 +1,9 @@
 import { useCallback } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Typography } from '@mui/material'
+import { Button, Theme, Typography } from '@mui/material'
+import { makeStyles } from '@mui/styles'
+import { clsx } from 'clsx'
 import * as z from 'zod'
 
 import { PatientNumber } from '../../common'
@@ -9,7 +11,16 @@ import { IVerifyForm } from '../models'
 
 import CodeInput from './CodeInput'
 
+const useStyles = makeStyles((theme: Theme) => ({
+  box: {
+    backgroundColor: 'white',
+    border: `1px solid ${theme.palette.grey[300]}`,
+  },
+}))
+
 const VerifyForm = () => {
+  const classes = useStyles()
+
   const form = useForm<IVerifyForm>({
     mode: 'onChange',
     criteriaMode: 'all',
@@ -19,7 +30,9 @@ const VerifyForm = () => {
     },
     resolver: zodResolver(
       z.object({
-        patientNumber: z.string({ required_error: 'Pole jest wymagane' }),
+        patientNumber: z
+          .string({ required_error: 'Pole jest wymagane' })
+          .min(7, 'Niepoprawny numer pacjenta'),
         code: z
           .string({ required_error: 'Pole jest wymagane' })
           .length(6, 'Kod weryfikacjyjny powinien zawierać 6 znaków')
@@ -34,7 +47,7 @@ const VerifyForm = () => {
 
   return (
     <FormProvider {...form}>
-      <div>
+      <div className={clsx('max-w-[550px] p-8', classes.box)}>
         <Typography variant={'h2'}>{'Weryfikacja pacjenta'}</Typography>
         <Typography>
           {
@@ -57,6 +70,7 @@ const VerifyForm = () => {
               'Pacjent otrzymywał kod weryfikacyjny podczas rejestracji do przychodni lub przy jednorazowej rejestracji'
             }
           />
+          <Button type={'submit'}>{'Sprawdź'}</Button>
         </form>
       </div>
     </FormProvider>
