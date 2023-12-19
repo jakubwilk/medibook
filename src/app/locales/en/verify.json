@@ -1,0 +1,12 @@
+{
+  "title": "Patient verification",
+  "description": "Enter correct data to fields above to check your last appointments without login to your account",
+  "fields": {
+    "patientNumber": "Patient number",
+    "verifyCode": "Verification code"
+  },
+  "helperText": {
+    "patientNumber": "Patient number should start with M or W letter and 6 numbers",
+    "verifyCode": "Patient received verification code during registration process in medical practice or after making single time appointment reservation"
+  }
+}

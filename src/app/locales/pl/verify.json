@@ -1,0 +1,12 @@
+{
+  "title": "Weryfikacja pacjenta",
+  "description": "Wprowadź poniższe dane by sprawdzić bez potrzeby logowania aktualnie utworzone wizyty",
+  "fields": {
+    "patientNumber": "Numer pacjenta",
+    "verifyCode": "Kod weryfikacyjny"
+  },
+  "helperText": {
+    "patientNumber": "Numer pacjenta zaczyna sie od litery M lub W, a następnie należy wprowadzić ciąg 6 cyfr",
+    "verifyCode": "Pacjent otrzymywał kod weryfikacyjny podczas rejestracji do przychodni lub przy jednorazowej rejestracji"
+  }
+}

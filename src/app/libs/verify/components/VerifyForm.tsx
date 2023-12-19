@@ -1,5 +1,6 @@
 import { useCallback } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 const VerifyForm = () => {
   const classes = useStyles()
+  const { t } = useTranslation()
 
   const form = useForm<IVerifyForm>({
     mode: 'onChange',
@@ -41,11 +43,11 @@ const VerifyForm = () => {
     resolver: zodResolver(
       z.object({
         patientNumber: z
-          .string({ required_error: 'Pole jest wymagane' })
-          .min(7, 'Niepoprawny numer pacjenta'),
+          .string({ required_error: t('global:validation.required') })
+          .min(7, t('global:validation.incorrectPatientNumber')),
         code: z
-          .string({ required_error: 'Pole jest wymagane' })
-          .length(6, 'Kod weryfikacjyjny powinien zawierać 6 znaków')
+          .string({ required_error: t('global:validation.required') })
+          .length(6, t('global:validation.incorrectVerificationCode'))
           .nullable(),
       }),
     ),
@@ -59,35 +61,28 @@ const VerifyForm = () => {
     <FormProvider {...form}>
       <div className={clsx('max-w-[550px] p-8', classes.box)}>
         <Typography variant={'h2'} className={clsx('pb-4', classes.title)}>
-          {'Weryfikacja pacjenta'}
+          {t('verify:title')}
         </Typography>
         <Typography className={clsx('pb-8', classes.description)}>
-          {
-            'Wprowadź poniższe dane by sprawdzić bez potrzeby logowania aktualnie utworzone\r'
-          }
-          {'wizyty\r'}
+          {t('verify:description')}
         </Typography>
         <form onSubmit={form.handleSubmit(handleSubmit)}>
           <PatientNumber
             fieldName={'patientNumber'}
-            label={'Numer pacjenta'}
-            helperText={
-              'Numer pacjenta zaczyna sie od litery M lub W, a następnie należy wprowadzić ciąg 6 cyfr'
-            }
+            label={t('verify:fields.patientNumber')}
+            helperText={t('verify:helperText.patientNumber')}
           />
           <CodeInput
             fieldName={'code'}
-            label={'Kod weryfikacyjny'}
-            helperText={
-              'Pacjent otrzymywał kod weryfikacyjny podczas rejestracji do przychodni lub przy jednorazowej rejestracji'
-            }
+            label={t('verify:fields.verifyCode')}
+            helperText={t('verify:helperText.verifyCode')}
           />
           <Button
             type={'submit'}
             variant={'contained'}
             className={clsx('w-full h-[50px]', classes.button)}
           >
-            {'Sprawdź'}
+            {t('global:action.check')}
           </Button>
         </form>
       </div>

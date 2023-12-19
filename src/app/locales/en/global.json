@@ -19,7 +19,8 @@
   },
   "action": {
     "confirm": "Confirm",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "check": "Check"
   },
   "languages": {
     "polish": "Polski",
@@ -29,5 +30,10 @@
     "default": "Default (100%)",
     "larger": "Large (115%)",
     "veryLarge": "Very large (130%)"
+  },
+  "validation": {
+    "required": "Field is required",
+    "incorrectPatientNumber": "Incorrect patient number",
+    "incorrectVerificationCode": "Incorrect verification code"
   }
 }
