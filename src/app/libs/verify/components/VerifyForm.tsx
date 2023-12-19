@@ -44,10 +44,21 @@ const VerifyForm = () => {
       z.object({
         patientNumber: z
           .string({ required_error: t('global:validation.required') })
-          .min(7, t('global:validation.incorrectPatientNumber')),
+          .min(7, t('global:validation.incorrectPatientNumber'))
+          .refine((value) => {
+            const numbers = value.slice(1)
+            return (
+              (value.startsWith('M') || value.startsWith('W')) &&
+              numbers.match(/^[0-9]+$/)
+            )
+          }, t('global:validation.incorrectPatientNumber'))
+          .nullable(),
         code: z
           .string({ required_error: t('global:validation.required') })
           .length(6, t('global:validation.incorrectVerificationCode'))
+          .refine((value) => {
+            return value.match(/^[0-9]+$/)
+          }, t('global:validation.incorrectVerificationCode'))
           .nullable(),
       }),
     ),
