@@ -6,15 +6,25 @@ import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 import * as z from 'zod'
 
-import { PatientNumber } from '../../common'
+import { important, PatientNumber } from '../../common'
 import { IVerifyForm } from '../models'
 
 import CodeInput from './CodeInput'
 
 const useStyles = makeStyles((theme: Theme) => ({
+  title: {
+    fontSize: important('1.5rem'),
+    fontWeight: important(theme.typography.fontWeightBold as number),
+  },
+  description: {
+    color: theme.palette.grey[800],
+  },
   box: {
     backgroundColor: 'white',
     border: `1px solid ${theme.palette.grey[300]}`,
+  },
+  button: {
+    marginTop: important('1.5rem'),
   },
 }))
 
@@ -48,8 +58,10 @@ const VerifyForm = () => {
   return (
     <FormProvider {...form}>
       <div className={clsx('max-w-[550px] p-8', classes.box)}>
-        <Typography variant={'h2'}>{'Weryfikacja pacjenta'}</Typography>
-        <Typography>
+        <Typography variant={'h2'} className={clsx('pb-4', classes.title)}>
+          {'Weryfikacja pacjenta'}
+        </Typography>
+        <Typography className={clsx('pb-8', classes.description)}>
           {
             'Wprowadź poniższe dane by sprawdzić bez potrzeby logowania aktualnie utworzone\r'
           }
@@ -70,7 +82,13 @@ const VerifyForm = () => {
               'Pacjent otrzymywał kod weryfikacyjny podczas rejestracji do przychodni lub przy jednorazowej rejestracji'
             }
           />
-          <Button type={'submit'}>{'Sprawdź'}</Button>
+          <Button
+            type={'submit'}
+            variant={'contained'}
+            className={clsx('w-full h-[50px]', classes.button)}
+          >
+            {'Sprawdź'}
+          </Button>
         </form>
       </div>
     </FormProvider>
