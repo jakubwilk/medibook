@@ -7,6 +7,6 @@
   },
   "helperText": {
     "patientNumber": "Patient number should start with M or W letter and 6 numbers",
-    "verifyCode": "Patient received verification code during registration process in medical practice or after making single time appointment reservation"
+    "verifyCode": "Patient received verification code of length 8 characters (numbers) during registration process in medical practice or after making single time appointment reservation"
   }
 }

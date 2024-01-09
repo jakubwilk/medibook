@@ -7,6 +7,6 @@
   },
   "helperText": {
     "patientNumber": "Numer pacjenta zaczyna sie od litery M lub W, a następnie należy wprowadzić ciąg 6 cyfr",
-    "verifyCode": "Pacjent otrzymywał kod weryfikacyjny podczas rejestracji do przychodni lub przy jednorazowej rejestracji"
+    "verifyCode": "Pacjent otrzymywał kod weryfikacyjny o długości 8 cyfr podczas rejestracji do przychodni lub przy jednorazowej rejestracji"
   }
 }
