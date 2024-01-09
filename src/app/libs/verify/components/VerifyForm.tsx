@@ -1,6 +1,6 @@
-import { useCallback } from 'react'
+import { useCallback, useEffect } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { useTranslation } from 'react-i18next'
+import { getI18n, useTranslation } from 'react-i18next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const VerifyForm = () => {
   const classes = useStyles()
   const { t } = useTranslation()
+  const { language } = getI18n()
 
   const form = useForm<IVerifyForm>({
     mode: 'onChange',
@@ -55,7 +56,7 @@ const VerifyForm = () => {
           .nullable(),
         code: z
           .string({ required_error: t('global:validation.required') })
-          .length(6, t('global:validation.incorrectVerificationCode'))
+          .length(8, t('global:validation.incorrectVerificationCode'))
           .refine((value) => {
             return value.match(/^[0-9]+$/)
           }, t('global:validation.incorrectVerificationCode'))
@@ -67,6 +68,14 @@ const VerifyForm = () => {
   const handleSubmit = useCallback((data: IVerifyForm) => {
     console.log('data', data)
   }, [])
+
+  useEffect(() => {
+    const revalidateAfterLanguageChange = async () => {
+      await form.trigger()
+    }
+
+    revalidateAfterLanguageChange()
+  }, [form, language])
 
   return (
     <FormProvider {...form}>

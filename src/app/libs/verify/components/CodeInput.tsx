@@ -1,5 +1,7 @@
+import { MouseEvent, useCallback, useState } from 'react'
 import { Controller, useFormContext } from 'react-hook-form'
-import { TextField, Theme, Typography } from '@mui/material'
+import { Visibility, VisibilityOff } from '@mui/icons-material'
+import { IconButton, InputAdornment, TextField, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
 
@@ -20,6 +22,13 @@ const useStyles = makeStyles((theme: Theme) => ({
 const CodeInput = ({ fieldName, label, helperText }: IProps) => {
   const { control } = useFormContext()
   const classes = useStyles()
+  const [showPassword, setShowPassword] = useState(false)
+
+  const handleClickShowPassword = useCallback(() => setShowPassword((show) => !show), [])
+
+  const handleMouseDownPassword = useCallback((event: MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault()
+  }, [])
 
   return (
     <Controller
@@ -41,6 +50,21 @@ const CodeInput = ({ fieldName, label, helperText }: IProps) => {
             onChange={onChange}
             onBlur={onBlur}
             error={!!error}
+            type={showPassword ? 'text' : 'password'}
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position={'end'}>
+                  <IconButton
+                    aria-label={'toggle password visibility'}
+                    onClick={handleClickShowPassword}
+                    onMouseDown={handleMouseDownPassword}
+                    edge={'end'}
+                  >
+                    {showPassword ? <VisibilityOff /> : <Visibility />}
+                  </IconButton>
+                </InputAdornment>
+              ),
+            }}
           />
         </>
       )}
