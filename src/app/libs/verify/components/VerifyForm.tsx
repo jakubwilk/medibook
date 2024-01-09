@@ -1,13 +1,15 @@
-import { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { getI18n, useTranslation } from 'react-i18next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
+import { useMutation } from '@tanstack/react-query'
 import { clsx } from 'clsx'
 import * as z from 'zod'
 
 import { important, PatientNumber } from '../../common'
+import { verifyPatient } from '../api'
 import { IVerifyForm } from '../models'
 
 import CodeInput from './CodeInput'
@@ -33,6 +35,15 @@ const VerifyForm = () => {
   const classes = useStyles()
   const { t } = useTranslation()
   const { language } = getI18n()
+  const [isLoading, setIsLoading] = useState(false)
+  const { mutate: verifyPatientMutation } = useMutation({
+    mutationFn: verifyPatient,
+    onMutate: () => setIsLoading(true),
+    onSuccess: (data) => {
+      console.log('1', data)
+      setIsLoading(false)
+    },
+  })
 
   const form = useForm<IVerifyForm>({
     mode: 'onChange',
@@ -65,9 +76,13 @@ const VerifyForm = () => {
     ),
   })
 
-  const handleSubmit = useCallback((data: IVerifyForm) => {
-    console.log('data', data)
-  }, [])
+  const handleSubmit = useCallback(
+    (data: IVerifyForm) => {
+      console.log('data', data)
+      verifyPatientMutation(data)
+    },
+    [verifyPatientMutation],
+  )
 
   useEffect(() => {
     const revalidateAfterLanguageChange = async () => {
@@ -101,6 +116,7 @@ const VerifyForm = () => {
             type={'submit'}
             variant={'contained'}
             className={clsx('w-full h-[50px]', classes.button)}
+            disabled={isLoading}
           >
             {t('global:action.check')}
           </Button>
