@@ -6,9 +6,15 @@ import { Button, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { useMutation } from '@tanstack/react-query'
 import { clsx } from 'clsx'
+import { isNil } from 'lodash'
 import * as z from 'zod'
 
-import { important, PatientNumber } from '../../common'
+import {
+  important,
+  PatientNumber,
+  SnackbarTypeEnum,
+  useSnackbarContext,
+} from '../../common'
 import { verifyPatient } from '../api'
 import { IVerifyForm } from '../models'
 
@@ -34,12 +40,18 @@ const useStyles = makeStyles((theme: Theme) => ({
 const VerifyForm = () => {
   const classes = useStyles()
   const { t } = useTranslation()
+  const { handleOpenSnackbar, handleCloseSnackbar } = useSnackbarContext()
   const [isLoading, setIsLoading] = useState(false)
   const { mutate: verifyPatientMutation } = useMutation({
     mutationFn: verifyPatient,
     onMutate: () => setIsLoading(true),
-    onSuccess: (data) => {
-      console.log('1', data)
+    onSuccess: ({ data, error }) => {
+      if (!isNil(error)) {
+        handleOpenSnackbar(SnackbarTypeEnum.ERROR, error)
+      } else {
+        handleCloseSnackbar()
+      }
+      console.log('data', data)
       setIsLoading(false)
     },
   })
@@ -77,7 +89,6 @@ const VerifyForm = () => {
 
   const handleSubmit = useCallback(
     (data: IVerifyForm) => {
-      console.log('data', data)
       verifyPatientMutation(data)
     },
     [verifyPatientMutation],

@@ -1,3 +1,4 @@
+export { default as AppSnackbar } from './AppSnackbar'
 export * from './back-to-home'
 export * from './button'
 export * from './change-font-size'
