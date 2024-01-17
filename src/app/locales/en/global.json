@@ -34,6 +34,7 @@
   "validation": {
     "required": "Field is required",
     "incorrectPatientNumber": "Incorrect patient number",
-    "incorrectVerificationCode": "Incorrect verification code"
+    "incorrectVerificationCode": "Incorrect verification code",
+    "patientNotExist": "Patient was not found. Please check if every field has correct data and try again"
   }
 }

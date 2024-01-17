@@ -34,6 +34,7 @@
   "validation": {
     "required": "Pole jest wymagane",
     "incorrectPatientNumber": "Niepoprawny numer pacjenta",
-    "incorrectVerificationCode": "Niepoprawny kod weryfikacyjny"
+    "incorrectVerificationCode": "Niepoprawny kod weryfikacyjny",
+    "patientNotExist": "Nie udało się znaleźć pacjenta. Proszę sprawdzić, czy wszystkie dane zostały podane prawidłowo"
   }
 }
