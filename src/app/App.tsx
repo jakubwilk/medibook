@@ -1,7 +1,7 @@
 import React from 'react'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
-import { FontSizeProvider } from './libs/common'
+import { FontSizeProvider, SnackbarProvider } from './libs/common'
 import { UserContextProvider } from './libs/user'
 import AppContainer from './AppContainer'
 
@@ -12,7 +12,9 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <UserContextProvider>
         <FontSizeProvider>
-          <AppContainer />
+          <SnackbarProvider>
+            <AppContainer />
+          </SnackbarProvider>
         </FontSizeProvider>
       </UserContextProvider>
     </QueryClientProvider>
