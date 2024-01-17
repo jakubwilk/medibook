@@ -1,6 +1,6 @@
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { getI18n, useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
@@ -34,7 +34,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 const VerifyForm = () => {
   const classes = useStyles()
   const { t } = useTranslation()
-  const { language } = getI18n()
   const [isLoading, setIsLoading] = useState(false)
   const { mutate: verifyPatientMutation } = useMutation({
     mutationFn: verifyPatient,
@@ -55,22 +54,22 @@ const VerifyForm = () => {
     resolver: zodResolver(
       z.object({
         patientNumber: z
-          .string({ required_error: t('global:validation.required') })
-          .min(7, t('global:validation.incorrectPatientNumber'))
+          .string({ required_error: 'global:validation.required' })
+          .length(7, 'global:validation.incorrectPatientNumber')
           .refine((value) => {
             const numbers = value.slice(1)
             return (
               (value.startsWith('M') || value.startsWith('W')) &&
               numbers.match(/^[0-9]+$/)
             )
-          }, t('global:validation.incorrectPatientNumber'))
+          }, 'global:validation.incorrectPatientNumber')
           .nullable(),
         code: z
-          .string({ required_error: t('global:validation.required') })
-          .length(8, t('global:validation.incorrectVerificationCode'))
+          .string({ required_error: 'global:validation.required' })
+          .length(8, 'global:validation.incorrectVerificationCode')
           .refine((value) => {
             return value.match(/^[0-9]+$/)
-          }, t('global:validation.incorrectVerificationCode'))
+          }, 'global:validation.incorrectVerificationCode')
           .nullable(),
       }),
     ),
@@ -83,14 +82,6 @@ const VerifyForm = () => {
     },
     [verifyPatientMutation],
   )
-
-  useEffect(() => {
-    const revalidateAfterLanguageChange = async () => {
-      await form.trigger()
-    }
-
-    revalidateAfterLanguageChange()
-  }, [form, language])
 
   return (
     <FormProvider {...form}>

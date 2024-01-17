@@ -1,4 +1,5 @@
 import { Controller, useFormContext } from 'react-hook-form'
+import { useTranslation } from 'react-i18next'
 import { TextField, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { clsx } from 'clsx'
@@ -19,6 +20,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 const PatientNumber = ({ fieldName, label, helperText }: IProps) => {
+  const { t } = useTranslation()
   const { control } = useFormContext()
   const classes = useStyles()
 
@@ -38,7 +40,7 @@ const PatientNumber = ({ fieldName, label, helperText }: IProps) => {
               name={name}
               label={label}
               defaultValue={value}
-              helperText={error?.message}
+              {...(error?.message && { helperText: t(error.message) })}
               className={'w-full'}
               onChange={onChange}
               onBlur={onBlur}
