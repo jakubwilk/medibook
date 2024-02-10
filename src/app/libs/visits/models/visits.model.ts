@@ -3,20 +3,10 @@ export interface IVisitsDoctor {
   imageUri: string
 }
 
-export interface IVisitsExamination {
-  pl: string
-  en: string
-}
-
-export interface IVisitsDescription {
-  pl: string
-  en: string
-}
-
 export interface IVisits {
+  id: string
   doctor: IVisitsDoctor
   room: string
   date: Date
-  examination: IVisitsExamination
-  description: IVisitsDescription
+  examination: string
 }
