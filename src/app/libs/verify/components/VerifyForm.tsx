@@ -1,6 +1,7 @@
 import { useCallback, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Button, Theme, Typography } from '@mui/material'
 import { makeStyles } from '@mui/styles'
@@ -12,6 +13,7 @@ import * as z from 'zod'
 import {
   important,
   PatientNumber,
+  ROUTES,
   SnackbarTypeEnum,
   useSnackbarContext,
 } from '../../common'
@@ -40,6 +42,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 const VerifyForm = () => {
   const classes = useStyles()
   const { t } = useTranslation()
+  const navigate = useNavigate()
   const { handleOpenSnackbar, handleCloseSnackbar } = useSnackbarContext()
   const [isLoading, setIsLoading] = useState(false)
   const { mutate: verifyPatientMutation } = useMutation({
@@ -53,6 +56,7 @@ const VerifyForm = () => {
       }
       console.log('data', data)
       setIsLoading(false)
+      navigate(ROUTES.VISITS, { state: { data } })
     },
   })
 

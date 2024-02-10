@@ -1,23 +1,27 @@
 import { createBrowserRouter } from 'react-router-dom'
 
-import { Layout } from '../libs/common'
-import { HomePage, LoginPage, VerifyPatientPage } from '../pages'
+import { Layout, ROUTES } from '../libs/common'
+import { HomePage, LoginPage, VerifyPatientPage, VisitsPage } from '../pages'
 
 export const router = createBrowserRouter([
   {
     element: <Layout />,
     children: [
       {
-        path: '/',
+        path: ROUTES.HOME,
         element: <HomePage />,
       },
       {
-        path: '/login',
+        path: ROUTES.LOGIN,
         element: <LoginPage />,
       },
       {
-        path: '/verify',
+        path: ROUTES.VERIFY,
         element: <VerifyPatientPage />,
+      },
+      {
+        path: ROUTES.VISITS,
+        element: <VisitsPage />,
       },
     ],
   },
