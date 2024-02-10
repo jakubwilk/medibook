@@ -52,11 +52,10 @@ const VerifyForm = () => {
       if (!isNil(error)) {
         handleOpenSnackbar(SnackbarTypeEnum.ERROR, error)
       } else {
+        navigate(ROUTES.VISITS, { state: { data } })
         handleCloseSnackbar()
       }
-      console.log('data', data)
       setIsLoading(false)
-      navigate(ROUTES.VISITS, { state: { data } })
     },
   })
 
